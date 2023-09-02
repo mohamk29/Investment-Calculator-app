@@ -1,6 +1,50 @@
+import { useState } from "react";
+
 const CalculatorForm = () => {
+  const [currentSavingsInput, setCurrentSavingsInput] = useState("");
+
+  const [yearlySavingsInput, setYearlySavingsInput] = useState("");
+
+  const [expectedInterestInput, setExpectedInterestInput] = useState("");
+
+  const [investmentDurationInput, setInvestmentDurationInput] = useState("");
+
+  const calculateHandler = (userInput) => {
+    // You might not directly want to bind it to the submit event on the form though...
+
+    const yearlyData = []; // per-year results
+
+    const expectedReturn = expectedInterestInput / 100;
+
+    // The below code calculates yearly results (total savings, interest etc)
+    for (let i = 0; i < investmentDurationInput; i++) {
+      const yearlyInterest = currentSavingsInput * expectedReturn;
+      currentSavingsInput += yearlyInterest + yearlySavingsInput;
+      yearlyData.push({
+        // feel free to change the shape of the data pushed to the array!
+        year: i + 1,
+        yearlyInterest: yearlyInterest,
+        savingsEndOfYear: currentSavingsInput,
+        yearlySavingsInput: yearlySavingsInput,
+      });
+    }
+
+    // do something with yearlyData ...
+  };
+
+  const onSubmitHandler = (event) => {
+    event.preventDefault();
+  };
+
+  const resetHandler = () => {
+    setCurrentSavingsInput("");
+    setYearlySavingsInput("");
+    setExpectedInterestInput("");
+    setInvestmentDurationInput("");
+  };
+
   return (
-    <form className="form">
+    <form className="form" onSubmit={onSubmitHandler}>
       <div className="input-group">
         <p>
           <label htmlFor="current-savings">Current Savings ($)</label>
@@ -24,10 +68,10 @@ const CalculatorForm = () => {
         </p>
       </div>
       <p className="actions">
-        <button type="reset" className="buttonAlt">
+        <button type="reset" className="buttonAlt" onClick={resetHandler}>
           Reset
         </button>
-        <button type="submit" className="button">
+        <button type="submit" className="button" onClick={calculateHandler}>
           Calculate
         </button>
       </p>
