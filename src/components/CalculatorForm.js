@@ -28,16 +28,18 @@ const CalculatorForm = (props) => {
   const yearlyData = [];
 
   const calculateHandler = () => {
+    let currentSavings = currentSavingsInput;
+
     const expectedReturn = expectedInterestInput / 100;
 
     for (let i = 0; i < investmentDurationInput; i++) {
-      const yearlyInterest = currentSavingsInput * expectedReturn;
-      currentSavingsInput += yearlyInterest + yearlySavingsInput;
+      const yearlyInterest = currentSavings * expectedReturn;
+      currentSavings += yearlyInterest + yearlySavingsInput;
       yearlyData.push({
         year: i + 1,
         yearlyInterest: yearlyInterest,
-        savingsEndOfYear: currentSavingsInput,
-        yearlySavingsInput: yearlySavingsInput,
+        savingsEndOfYear: currentSavings,
+        yearlyContribution: yearlySavingsInput,
       });
     }
   };
@@ -45,7 +47,6 @@ const CalculatorForm = (props) => {
   const onSubmitHandler = (event) => {
     event.preventDefault();
     calculateHandler();
-    props.onCalculatedData(yearlyData);
   };
 
   const resetHandler = () => {
