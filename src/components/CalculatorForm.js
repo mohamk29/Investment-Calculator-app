@@ -1,6 +1,8 @@
 import { useState } from "react";
 
 const CalculatorForm = (props) => {
+  let calculationData = {};
+
   const [currentSavingsInput, setCurrentSavingsInput] = useState("");
 
   const [yearlySavingsInput, setYearlySavingsInput] = useState("");
@@ -25,29 +27,16 @@ const CalculatorForm = (props) => {
     setInvestmentDurationInput(event.target.value);
   };
 
-  const yearlyData = [];
-
-  const calculateHandler = () => {
-    let currentSavings = currentSavingsInput;
-
-    const expectedReturn = expectedInterestInput / 100;
-
-    for (let i = 0; i < investmentDurationInput; i++) {
-      const yearlyInterest = currentSavings * expectedReturn;
-      currentSavings += yearlyInterest + yearlySavingsInput;
-      yearlyData.push({
-        year: i + 1,
-        yearlyInterest: yearlyInterest,
-        savingsEndOfYear: currentSavings,
-        yearlyContribution: yearlySavingsInput,
-      });
-    }
-  };
-
   const submitHandler = (event) => {
     event.preventDefault();
-    calculateHandler();
-    props.onCalculatedData(yearlyData);
+
+    calculationData = {
+      currentSavings: currentSavingsInput,
+      yearlySavingsInput: yearlySavingsInput,
+      expectedInterestInput: expectedInterestInput,
+      investmentDurationInput: investmentDurationInput,
+    };
+    props.onCalculatedData(calculationData);
   };
 
   const resetHandler = () => {
