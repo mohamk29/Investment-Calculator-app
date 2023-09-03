@@ -47,6 +47,7 @@ const CalculatorForm = (props) => {
   const submitHandler = (event) => {
     event.preventDefault();
     calculateHandler();
+    props.onCalculatedData(yearlyData);
   };
 
   const resetHandler = () => {
