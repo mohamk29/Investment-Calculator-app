@@ -31,7 +31,7 @@ const CalculatorForm = (props) => {
     event.preventDefault();
 
     calculationData = {
-      currentSavings: currentSavingsInput,
+      currentSavingsInput: currentSavingsInput,
       yearlySavingsInput: yearlySavingsInput,
       expectedInterestInput: expectedInterestInput,
       investmentDurationInput: investmentDurationInput,

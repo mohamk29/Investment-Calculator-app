@@ -1,11 +1,13 @@
 import Header from "./components/Header";
 import CalculatorForm from "./components/CalculatorForm";
 import ResultTable from "./components/ResultTable";
+import { useState } from "react";
 
 function App() {
-  const yearlyData = [];
+  const [results, setResults] = useState(null);
 
   const calculateHandler = (data) => {
+    const yearlyData = [];
     let currentSavings = data.currentSavingsInput;
 
     const expectedReturn = data.expectedInterestInput / 100;
@@ -20,14 +22,15 @@ function App() {
         yearlyContribution: data.yearlySavingsInput,
       });
     }
+    setResults(yearlyData);
   };
 
   return (
     <div>
       <Header />
       <CalculatorForm onCalculatedData={calculateHandler} />
-
-      <ResultTable dataArray={yearlyData} />
+      {!results && <p>No calculation made yet...</p>}
+      {results && <ResultTable dataArray={results} />}
     </div>
   );
 }

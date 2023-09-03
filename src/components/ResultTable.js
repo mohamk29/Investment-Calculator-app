@@ -14,13 +14,11 @@ const ResultTable = (props) => {
         <tbody>
           {props.dataArray.map((data) => {
             return (
-              <tr>
+              <tr key={data.year}>
                 <td>{data.year}</td>
                 <td>{data.savingsEndOfYear}</td>
                 <td>{data.yearlyInterest}</td>
-                <td>
-                  {data.savingsEndOfYear - data.yearlyContribution * data.year}
-                </td>
+                <td>{data.savingsEndOfYear - 2}</td>
                 <td>
                   {data.savingsEndOfYear + data.yearlyContribution * data.year}
                 </td>
