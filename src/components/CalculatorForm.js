@@ -44,7 +44,7 @@ const CalculatorForm = (props) => {
     }
   };
 
-  const onSubmitHandler = (event) => {
+  const submitHandler = (event) => {
     event.preventDefault();
     calculateHandler();
   };
@@ -57,7 +57,7 @@ const CalculatorForm = (props) => {
   };
 
   return (
-    <form className="form" onSubmit={onSubmitHandler}>
+    <form onSubmit={submitHandler} className="form">
       <div className="input-group">
         <p>
           <label htmlFor="current-savings">Current Savings ($)</label>
@@ -100,7 +100,7 @@ const CalculatorForm = (props) => {
         <button type="reset" className="buttonAlt" onClick={resetHandler}>
           Reset
         </button>
-        <button type="submit" className="button" onClick={calculateHandler}>
+        <button type="submit" className="button">
           Calculate
         </button>
       </p>
