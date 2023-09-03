@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const CalculatorForm = () => {
+const CalculatorForm = (props) => {
   const [currentSavingsInput, setCurrentSavingsInput] = useState("");
 
   const [yearlySavingsInput, setYearlySavingsInput] = useState("");
@@ -9,31 +9,43 @@ const CalculatorForm = () => {
 
   const [investmentDurationInput, setInvestmentDurationInput] = useState("");
 
-  const calculateHandler = (userInput) => {
-    // You might not directly want to bind it to the submit event on the form though...
+  const currentSavingsHandler = (event) => {
+    setCurrentSavingsInput(event.target.value);
+  };
 
-    const yearlyData = []; // per-year results
+  const yearlySavingsHandler = (event) => {
+    setYearlySavingsInput(event.target.value);
+  };
 
+  const expectedInterestHandler = (event) => {
+    setExpectedInterestInput(event.target.value);
+  };
+
+  const investmentDurationHandler = (event) => {
+    setInvestmentDurationInput(event.target.value);
+  };
+
+  const yearlyData = [];
+
+  const calculateHandler = () => {
     const expectedReturn = expectedInterestInput / 100;
 
-    // The below code calculates yearly results (total savings, interest etc)
     for (let i = 0; i < investmentDurationInput; i++) {
       const yearlyInterest = currentSavingsInput * expectedReturn;
       currentSavingsInput += yearlyInterest + yearlySavingsInput;
       yearlyData.push({
-        // feel free to change the shape of the data pushed to the array!
         year: i + 1,
         yearlyInterest: yearlyInterest,
         savingsEndOfYear: currentSavingsInput,
         yearlySavingsInput: yearlySavingsInput,
       });
     }
-
-    // do something with yearlyData ...
   };
 
   const onSubmitHandler = (event) => {
     event.preventDefault();
+    calculateHandler();
+    props.onCalculatedData(yearlyData);
   };
 
   const resetHandler = () => {
@@ -48,11 +60,19 @@ const CalculatorForm = () => {
       <div className="input-group">
         <p>
           <label htmlFor="current-savings">Current Savings ($)</label>
-          <input type="number" id="current-savings" />
+          <input
+            type="number"
+            id="current-savings"
+            onChange={currentSavingsHandler}
+          />
         </p>
         <p>
           <label htmlFor="yearly-contribution">Yearly Savings ($)</label>
-          <input type="number" id="yearly-contribution" />
+          <input
+            type="number"
+            id="yearly-contribution"
+            onChange={yearlySavingsHandler}
+          />
         </p>
       </div>
       <div className="input-group">
@@ -60,11 +80,19 @@ const CalculatorForm = () => {
           <label htmlFor="expected-return">
             Expected Interest (%, per year)
           </label>
-          <input type="number" id="expected-return" />
+          <input
+            type="number"
+            id="expected-return"
+            onChange={expectedInterestHandler}
+          />
         </p>
         <p>
           <label htmlFor="duration">Investment Duration (years)</label>
-          <input type="number" id="duration" />
+          <input
+            type="number"
+            id="duration"
+            onChange={investmentDurationHandler}
+          />
         </p>
       </div>
       <p className="actions">

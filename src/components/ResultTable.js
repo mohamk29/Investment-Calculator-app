@@ -1,4 +1,4 @@
-const ResultTable = () => {
+const ResultTable = (props) => {
   return (
     <div>
       {/* Todo: Show below table conditionally (only once result data is available) */}
