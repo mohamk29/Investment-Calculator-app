@@ -27,7 +27,11 @@ function App() {
     <div>
       <Header />
       <CalculatorForm onCalculatedData={calculateHandler} />
-      {!results && <p>No calculation have been made yet...</p>}
+      {!results && (
+        <p style={{ textAlign: "center" }}>
+          No investments have been calculated yet
+        </p>
+      )}
       {results && <ResultTable dataArray={results} />}
     </div>
   );
