@@ -8,18 +8,16 @@ function App() {
 
   const calculateHandler = (data) => {
     const yearlyData = [];
-    let currentSavings = data.currentSavingsInput;
 
-    const expectedReturn = data.expectedInterestInput / 100;
+    let totalPriceOfShares = data.totalSharesInput * data.pricePerShareInput;
+    let increaseAmount = data.expectedIncreaseInput / 100;
+    let yearlyProfit = totalPriceOfShares * increaseAmount;
 
     for (let i = 0; i < data.investmentDurationInput; i++) {
-      const yearlyInterest = currentSavings * expectedReturn;
-      currentSavings += yearlyInterest + data.yearlySavingsInput;
       yearlyData.push({
         year: i + 1,
-        yearlyInterest: yearlyInterest,
-        savingsEndOfYear: currentSavings,
-        yearlyContribution: data.yearlySavingsInput,
+        yearlyProfit: yearlyProfit,
+        investedCapital: totalPriceOfShares,
       });
     }
     setResults(yearlyData);
@@ -29,7 +27,7 @@ function App() {
     <div>
       <Header />
       <CalculatorForm onCalculatedData={calculateHandler} />
-      {!results && <p>No calculation made yet...</p>}
+      {!results && <p>No calculation have been made yet...</p>}
       {results && <ResultTable dataArray={results} />}
     </div>
   );

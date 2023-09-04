@@ -3,24 +3,24 @@ import { useState } from "react";
 const CalculatorForm = (props) => {
   let calculationData = {};
 
-  const [currentSavingsInput, setCurrentSavingsInput] = useState("");
+  const [totalSharesInput, setTotalSharesInput] = useState("");
 
-  const [yearlySavingsInput, setYearlySavingsInput] = useState("");
+  const [pricePerShareInput, setPricePerShareInput] = useState("");
 
-  const [expectedInterestInput, setExpectedInterestInput] = useState("");
+  const [expectedIncreaseInput, setExpectedIncreaseInput] = useState("");
 
   const [investmentDurationInput, setInvestmentDurationInput] = useState("");
 
-  const currentSavingsHandler = (event) => {
-    setCurrentSavingsInput(event.target.value);
+  const totalSharesHandler = (event) => {
+    setTotalSharesInput(event.target.value);
   };
 
-  const yearlySavingsHandler = (event) => {
-    setYearlySavingsInput(event.target.value);
+  const pricePerSharesHandler = (event) => {
+    setPricePerShareInput(event.target.value);
   };
 
-  const expectedInterestHandler = (event) => {
-    setExpectedInterestInput(event.target.value);
+  const expectedIncreaseHandler = (event) => {
+    setExpectedIncreaseInput(event.target.value);
   };
 
   const investmentDurationHandler = (event) => {
@@ -31,18 +31,18 @@ const CalculatorForm = (props) => {
     event.preventDefault();
 
     calculationData = {
-      currentSavingsInput: currentSavingsInput,
-      yearlySavingsInput: yearlySavingsInput,
-      expectedInterestInput: expectedInterestInput,
+      totalSharesInput: totalSharesInput,
+      pricePerShareInput: pricePerShareInput,
+      expectedIncreaseInput: expectedIncreaseInput,
       investmentDurationInput: investmentDurationInput,
     };
     props.onCalculatedData(calculationData);
   };
 
   const resetHandler = () => {
-    setCurrentSavingsInput("");
-    setYearlySavingsInput("");
-    setExpectedInterestInput("");
+    setTotalSharesInput("");
+    setPricePerShareInput("");
+    setExpectedIncreaseInput("");
     setInvestmentDurationInput("");
   };
 
@@ -50,31 +50,31 @@ const CalculatorForm = (props) => {
     <form onSubmit={submitHandler} className="form">
       <div className="input-group">
         <p>
-          <label htmlFor="current-savings">Current Savings ($)</label>
+          <label htmlFor="total-shares">Total Numbers of Shares</label>
           <input
             type="number"
-            id="current-savings"
-            onChange={currentSavingsHandler}
+            id="total-shares"
+            onChange={totalSharesHandler}
           />
         </p>
         <p>
-          <label htmlFor="yearly-contribution">Yearly Savings ($)</label>
+          <label htmlFor="price-per-share">Price Per Share ($)</label>
           <input
             type="number"
-            id="yearly-contribution"
-            onChange={yearlySavingsHandler}
+            id="price-per-share"
+            onChange={pricePerSharesHandler}
           />
         </p>
       </div>
       <div className="input-group">
         <p>
-          <label htmlFor="expected-return">
-            Expected Interest (%, per year)
+          <label htmlFor="expected-increase">
+            Expected Increase In Price (%, per year)
           </label>
           <input
             type="number"
-            id="expected-return"
-            onChange={expectedInterestHandler}
+            id="expected-increase"
+            onChange={expectedIncreaseHandler}
           />
         </p>
         <p>

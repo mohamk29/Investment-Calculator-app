@@ -11,9 +11,7 @@ const ResultTable = (props) => {
         <thead>
           <tr>
             <th>Year </th>
-            <th>Total Savings</th>
-            <th>Interest (Year)</th>
-            <th>Total Interest</th>
+            <th>Yearly Profit</th>
             <th>Invested Capital</th>
           </tr>
         </thead>
@@ -22,10 +20,8 @@ const ResultTable = (props) => {
             return (
               <tr key={data.year}>
                 <td>{data.year}</td>
-                <td>{formatter.format(data.savingsEndOfYear)}</td>
-                <td>{formatter.format(data.yearlyInterest)}</td>
-                <td>{formatter.format(data.savingsEndOfYear - 2)}</td>
-                <td>{formatter.format(data.savingsEndOfYear + 20)}</td>
+                <td>{formatter.format(data.yearlyProfit)}</td>
+                <td>{formatter.format(data.investedCapital)}</td>
               </tr>
             );
           })}
