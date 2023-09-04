@@ -54,6 +54,7 @@ const CalculatorForm = (props) => {
           <label htmlFor="total-shares">Total Numbers of Shares</label>
           <input
             type="number"
+            step="0.01"
             id="total-shares"
             onChange={totalSharesHandler}
           />
@@ -62,6 +63,7 @@ const CalculatorForm = (props) => {
           <label htmlFor="price-per-share">Price Per Share ($)</label>
           <input
             type="number"
+            step="0.01"
             id="price-per-share"
             onChange={pricePerSharesHandler}
           />
@@ -74,6 +76,7 @@ const CalculatorForm = (props) => {
           </label>
           <input
             type="number"
+            step="0.01"
             id="expected-increase"
             onChange={expectedIncreaseHandler}
           />
